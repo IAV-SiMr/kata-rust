@@ -1,4 +1,4 @@
 image: gitpod/workspace-rust
 
 tasks:
-  - init: cd KataUnitTest
+  - command: cd KataUnitTest
