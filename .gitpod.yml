@@ -1,5 +1,5 @@
 image: gitpod/workspace-rust
 
 tasks:
-  - init: cd KataUnitTest && cargo test
-  - command: chmod +x ./OnFileChange.sh && cd KataUnitTest && ../OnFileChange.sh . "cargo test"
+  - init: sudo apt -y install inotify-tools
+  - command: cd KataUnitTest && ../OnFileChange.sh cargo test

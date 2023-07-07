@@ -1,11 +1,24 @@
 #!/bin/bash
  
-DIR_TO_WATCH=${1}
-COMMAND=${2}
+if [ -z "$(which inotifywait)" ]; then
+    echo "inotifywait not installed."
+    echo "In most distros, it is available in the inotify-tools package."
+    exit 1
+fi
  
-trap "echo Exited!; exit;" SIGINT SIGTERM
-while [[ 1=1 ]]
-do
-  watch --chgexit -n 1 "ls --all -l --recursive --full-time ${DIR_TO_WATCH} | sha256sum" && ${COMMAND}
-  sleep 1
+counter=0;
+ 
+function execute() {
+    counter=$((counter+1))
+    echo "Detected change n. $counter" 
+    eval "$@"
+}
+ 
+inotifywait --recursive --monitor --format "%e %w%f" \
+--include '\.rs' \
+--event modify,move,create,delete ./ \
+| while read changed; do
+    echo $changed
+    execute "$@"
+    sleep 2
 done
