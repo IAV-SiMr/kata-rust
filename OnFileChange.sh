@@ -1,4 +1,5 @@
 #!/bin/bash
+ sudo apt -y install inotify-tools
  
 if [ -z "$(which inotifywait)" ]; then
     echo "inotifywait not installed."
