@@ -1,4 +1,5 @@
 image: gitpod/workspace-rust
 
 tasks:
+  - init: chmod +x ./OnFileChange.sh && cd KataUnitTest && ./OnFileChange.sh . "cargo test"
   - command: cd KataUnitTest
