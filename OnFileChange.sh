@@ -11,8 +11,10 @@ counter=0;
  
 function execute() {
     counter=$((counter+1))
-    echo "Detected change n. $counter" 
-    eval "$@"
+    if [ $((counter%2)) -eq 1 ]; then
+        echo "Detected change n. $counter" 
+        eval "$@"
+    fi
 }
  
 inotifywait --recursive --monitor --format "%e %w%f" \
@@ -21,5 +23,4 @@ inotifywait --recursive --monitor --format "%e %w%f" \
 | while read changed; do
     echo $changed
     execute "$@"
-    sleep 2
 done
