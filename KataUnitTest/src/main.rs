@@ -18,6 +18,6 @@ mod tests {
 
     #[test]
     fn test_adder() {
-        assert_eq!(adder(2, 2), 4);
+        assert_eq!(adder(2, 2), 5);
     }
 }
