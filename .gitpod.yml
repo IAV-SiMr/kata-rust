@@ -1,4 +1,4 @@
 image: gitpod/workspace-rust
 
 tasks:
-  - command: cd KataUnitTest && ../OnFileChange.sh "RUSTFLAGS=\"$RUSTFLAGS -A non_snake_case\" cargo test"
+  - command: cd KataUnitTest; RUSTFLAGS="$RUSTFLAGS -A non_snake_case" ../OnFileChange.sh . "\.rs" "cargo test"
